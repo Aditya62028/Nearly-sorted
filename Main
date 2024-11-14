@@ -1,0 +1,40 @@
+import java.util.PriorityQueue;
+public class Main {
+    public void nearlySorted(int[] arr, int k) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        for (int i = 0; i <= k && i < arr.length; i++) {
+            minHeap.add(arr[i]);
+        }
+        int index = 0;
+        for (int i = k + 1; i < arr.length; i++) {
+            arr[index++] = minHeap.poll();
+            minHeap.add(arr[i]);
+        }
+        while (!minHeap.isEmpty()) {
+            arr[index++] = minHeap.poll();
+        }
+    }
+    public void printArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+    public static void main(String[] args) {
+        Main solution = new Main();
+        int[] arr1 = {6, 5, 3, 2, 8, 10, 9};
+        int k1 = 3;
+        System.out.println("Original array 1: ");
+        solution.printArray(arr1);
+        solution.nearlySorted(arr1, k1);
+        System.out.println("Sorted array 1: ");
+        solution.printArray(arr1);
+        int[] arr2 = {1, 4, 5, 2, 3, 6, 7, 8, 9, 10};
+        int k2 = 2;
+        System.out.println("\nOriginal array 2: ");
+        solution.printArray(arr2);
+        solution.nearlySorted(arr2, k2);
+        System.out.println("Sorted array 2: ");
+        solution.printArray(arr2);
+    }
+}
